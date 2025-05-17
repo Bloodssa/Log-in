@@ -1,0 +1,337 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Inter;
+}
+:root {
+    --white: #ffffff;
+    --primary: #e1e7f4;
+    --secondary: #11bce2;
+    --button-color: linear-gradient(135deg, #3a8eff, #00cfff);
+    --font-inter: Inter, sans-serif;;
+}
+body {
+    font-family: var(--font-inter);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url(bg.png);
+    background-repeat: no-repeat;
+    background-position: 100%;
+    background-size: cover;
+    animation: bg-pan-tl 25s infinite both;
+}
+.container {
+    width: 440px;
+    height: 80vh;
+    border-radius: 20px;
+    background-color: transparent;
+    backdrop-filter: blur(30px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+    position: relative;
+    
+}
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+.container::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  z-index: -1;  
+  inset: 0;
+  border-radius: 20px;
+  border: 4px solid transparent;
+  border-image: conic-gradient(from var(--angle), transparent,transparent,transparent,transparent, #00f2ff,
+  transparent,transparent,transparent, #00fff2,#00fff2)1;
+  pointer-events: none;
+  animation: spin 6s linear infinite;
+}
+.container::before {
+  filter: blur(1.5rem);
+  opacity: 0.8;
+}
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 5px;
+}
+.logo_container {
+    width: 60px;
+    height: 60px;
+    background-color: rgba(7, 7, 244, 0.271);
+    border-radius: 10px;
+    box-shadow: 1px 1px 10px rgba(92, 150, 244, 0.855);
+    margin-bottom: 14px;
+}
+.img_logo {
+  width: 100%;
+  height: 100%;
+}
+.welcome {
+  font-size: 35px;
+  color: var(--white);
+  width: 0;
+  white-space: nowrap;
+  border-right: 3px solid var(--white);
+  overflow: hidden;
+  position: relative;
+  animation: type 2s steps(10) forwards, blink 0.7s step-end infinite;
+  animation-delay: 0.5s;
+}
+.first {
+  font-size: 18px;
+  color: var(--primary);
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+.first a {
+  color: var(--secondary);
+  font-weight: 500;
+  text-decoration: none;
+  font-size: 20px;
+}
+.pass {
+  font-size: 13px;
+  color: var(--white);
+}
+form {
+    display: flex;
+    margin: auto;
+    margin-block: 30px;
+    width: min(350px, 90vw);
+    gap: 15px;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+form input,
+form button {
+  all: unset;
+  padding: 10px;
+  border-radius: 15px;
+  background-color: transparent;
+  box-shadow: 0 10px 30px #0005;
+  border: 3px solid rgba(27, 174, 227, 1);
+  color: var(--white);
+}
+form * {
+    width: 100%!important;
+}
+form input {
+    background-color: transparent;
+}
+form .button {
+  text-align: center;
+  cursor: pointer;
+  background: linear-gradient(90deg,rgba(27, 174, 227, 1) 62%, rgba(7, 7, 237, 1) 96%);
+}
+input::placeholder {
+  color: var(--white);
+  text-align: center;
+}
+.magic {
+  text-align: center;
+  color: var(--secondary);
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.or {
+  font-size: 18px;
+  position: relative;
+  color: var(--white);
+  text-align: center;
+}
+.or::after {
+  content: '';
+  height: 1px;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  background-image: linear-gradient(to right,#ffffff 0 40%,  transparent 40% 60%,  #ffffff 60%);
+}
+.phone {
+    background-color: transparent !important;
+    text-align: center;
+}
+.last {
+  text-align: center;
+  font-size: 15px;
+  margin-top: 15px;
+  color: var(--primary);
+}
+.last a {
+  color: var(--secondary);
+}
+input:invalid:not(:placeholder-shown) {
+  border-color: red;
+  background-image: url(checked_red.png);
+}
+input:valid:not(:placeholder-shown) {
+  border-color: rgb(0, 255, 0);
+  background-image: url(checked_green.png);
+}
+input:valid:not(:placeholder-shown),
+input:invalid:not(:placeholder-shown){
+  background-position: calc(100% - 20px) center;
+  background-repeat: no-repeat;
+  background-size: 20px;
+}
+input:invalid:not(:placeholder-shown) + .pass {
+  color: red;
+}
+input:invalid ~ button[type="submit"] {
+  opacity: .6;
+  pointer-events: none;
+}
+
+/*MEDIA SCREEN*/
+@media screen and (max-width: 1024px) {
+    .container {
+        height: 88vh;
+    }
+    .logo_container {
+      margin-top: 15px;
+    }
+    .welcome {
+      font-size: 30px;
+    }
+    .first {
+      font-size: 16px;
+    }
+    .first a {
+      font-size: 18px;
+    }
+    .pass {
+      font-size: 12px;
+    }
+    form {
+      width: min(300px, 90vw);
+    }
+    
+}
+
+@media screen and (max-width: 435px) {
+    .container {
+      width: 330px;
+      height: 85vh;
+    }
+    form {
+          width: min(250px, 90vw);
+    }
+    .welcome {
+      font-size: 25px;
+    }
+    form input,
+    form button {
+      padding: 8px;
+    }
+    form .button {
+      padding: 8px;
+    }
+    form input {
+      padding: 8px;
+    }
+    form .magic {
+      font-size: 16px;
+    }
+    .or {
+      font-size: 16px;
+    }
+}
+
+@media screen and (max-width: 321px) {
+  .container {
+      width: 280px;
+      height: 90vh;
+    }
+    form {
+      width: min(220px, 80vw);
+    }
+    form input,
+    form button {
+      padding: 6px;
+    }
+    form .button {
+      padding: 8px;
+    }
+    form input {
+      padding: 6px;
+    }
+    form .magic {
+      font-size: 14px;
+    }
+    .or {
+      font-size: 14px;
+    }
+    .first {
+      font-size: 13px;
+    }
+    .first a {
+      font-size: 15px;
+    }
+    .pass {
+      font-size: 10px;
+    }
+}
+
+/*ANIMATION*/
+@keyframes bg-pan-tl {
+  0%,
+  100% {
+    background-position: 102% 100%;
+  }
+  30% {
+    background-position: 19% 20%;
+  }
+  50% {
+    background-position: 0% 0%;
+  }
+  60% {
+    background-position: 40% 40%;
+  }
+}
+
+@keyframes spin {
+  from {
+    --angle: 0deg;
+  }
+  to {
+    --angle: 360deg;
+  }
+}
+
+@keyframes type {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    border-color: transparent;
+  }
+  50% {
+    border-color: var(--white);
+  }
+}
